@@ -1,4 +1,6 @@
-import React, { createContext, useState } from 'react';
+// context/ThemeContext.tsx
+import React, { createContext, useState, useEffect } from 'react';
+import { Appearance } from 'react-native';
 
 type ThemeContextType = {
   darkMode: boolean;
@@ -6,7 +8,7 @@ type ThemeContextType = {
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
-  darkMode: false,
+  darkMode: false, // default to light mode until we get the user's preference
   toggleDarkMode: () => {},
 });
 
@@ -15,6 +17,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode; initialDarkMod
   initialDarkMode,
 }) => {
   const [darkMode, setDarkMode] = useState(initialDarkMode);
+
+  useEffect(() => {
+    if (initialDarkMode !== undefined) {
+      setDarkMode(initialDarkMode);
+    }
+  }, [initialDarkMode]);
 
   const toggleDarkMode = (value: boolean) => {
     setDarkMode(value);

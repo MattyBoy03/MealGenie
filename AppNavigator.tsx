@@ -21,6 +21,7 @@ export type RootStackParamList = {
   RecipeFinder: undefined;
   SavedRecipes: undefined;
   Account: undefined;
+  RecipeDetail: { recipeId: number };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
