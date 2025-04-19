@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { NavigationContainer, DefaultTheme, DarkTheme, useTheme } from '@react-navigation/native';
+import React, { useContext, useEffect, useState } from 'react';
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from './lib/firebaseConfig';
+import { ThemeContext } from './context/ThemeContext';
 
 import SignUpScreen from './screens/SignUpScreen';
 import LogInScreen from './screens/LogInScreen';
@@ -11,8 +12,6 @@ import HomeScreen from './screens/HomeScreen';
 import RecipeFinderScreen from './screens/RecipeFinderScreen';
 import SavedRecipesScreen from './screens/SavedRecipesScreen';
 import AccountScreen from './screens/AccountScreen';
-
-import { ThemeContext } from './context/ThemeContext'; // 👈 Grab theme context
 
 export type RootStackParamList = {
   SignUp: undefined;
@@ -27,8 +26,8 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
-  const { darkMode } = useContext(ThemeContext); // 👈 Access dark mode
   const [initialRoute, setInitialRoute] = useState<'SignUp' | 'Home' | 'TasteProfile' | null>(null);
+  const { darkMode } = useContext(ThemeContext);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
@@ -50,16 +49,13 @@ export default function AppNavigator() {
     <NavigationContainer theme={darkMode ? DarkTheme : DefaultTheme}>
       <Stack.Navigator
         initialRouteName={initialRoute}
-        screenOptions={({ navigation, route }) => ({
+        screenOptions={{
           headerBackVisible: false,
           headerStyle: {
             backgroundColor: darkMode ? '#000' : '#fff',
           },
-          headerTitleStyle: {
-            color: darkMode ? '#fff' : '#000',
-          },
           headerTintColor: darkMode ? '#fff' : '#000',
-        })}
+        }}
       >
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="LogIn" component={LogInScreen} />
