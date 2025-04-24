@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'YOUR_SPOONACULAR_API_KEY';
+const API_KEY = '92cc191e28314d8396bedd2198a7a5c2';
 const BASE_URL = 'https://api.spoonacular.com';
 
 export const getIngredientPrices = async (ingredients: string[]) => {

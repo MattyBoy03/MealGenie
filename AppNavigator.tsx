@@ -12,6 +12,8 @@ import HomeScreen from './screens/HomeScreen';
 import RecipeFinderScreen from './screens/RecipeFinderScreen';
 import SavedRecipesScreen from './screens/SavedRecipesScreen';
 import AccountScreen from './screens/AccountScreen';
+import RecipeDetailScreen from './screens/RecipeDetailScreen';
+
 
 export type RootStackParamList = {
   SignUp: undefined;
@@ -65,6 +67,8 @@ export default function AppNavigator() {
         <Stack.Screen name="RecipeFinder" component={RecipeFinderScreen} />
         <Stack.Screen name="SavedRecipes" component={SavedRecipesScreen} />
         <Stack.Screen name="Account" component={AccountScreen} />
+        <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

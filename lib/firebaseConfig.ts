@@ -22,3 +22,4 @@ const auth = getAuth(app);
 const firestore = getFirestore(app);  // Initialize Firestore here
 
 export { auth, firestore };  // Make sure to export firestore here
+export { app };
